@@ -18,11 +18,17 @@ public class Look : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = player.position;   
         Cursor.lockState = CursorLockMode.Locked;
-        horizontal += sensivity * Input.GetAxisRaw("Mouse X");
+        horizontal += sensivity * Input.GetAxisRaw("Mouse X");  
         vertical += sensivity * Input.GetAxisRaw("Mouse Y");
-        transform.eulerAngles = new Vector3(-vertical, horizontal, 0);
 
-        player.transform.eulerAngles = new Vector3(0, horizontal, 0);
+        vertical = Mathf.Clamp(vertical, -90f, 90f);
+
+        transform.rotation = Quaternion.Euler(-vertical, horizontal, 0);
+        player.rotation = Quaternion.Euler(0, horizontal, 0);
+   
+
     }
 }
+    
